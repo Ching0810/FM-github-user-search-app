@@ -2,27 +2,27 @@ import { Stack, Typography } from "@mui/material"
 import ModeButton from "./ModeButton"
 
 // Header component which contain logo and mode switch button
-export default function Header({mode, setMode}) {
+export default function Header({setMode}) {
   return (
     <>
       <Stack
         direction="row"
         justifyContent="space-between"
         alignItems="center"
-        sx={{ width: '730px', height: '38px' }}
+        sx={{ width: '100%', height: '38px' }}
       >
         <Typography 
           variant="h1"
           sx={{
             color: (theme) =>
               theme.palette.mode === 'light'
-              ? 'text.light'
-              : 'text.dark',
+              ? 'text.logo'
+              : 'text.light',
           }}
         >
           devfinder
         </Typography>
-        <ModeButton mode={mode} setMode={setMode}/>
+        <ModeButton setMode={setMode}/>
       </Stack>
     </>
   )

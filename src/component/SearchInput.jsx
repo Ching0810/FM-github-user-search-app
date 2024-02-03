@@ -4,9 +4,12 @@ import { Button } from '@mui/material';
 import searchIcon from '../assets/icon-search.svg'
 import { getUserInfo } from '../API/api';
 import { useState } from 'react';
+import { useTheme } from '@emotion/react';
 
 export default function SearchInput() {
   const [username, setUsername] = useState('')
+
+  const theme = useTheme()
 
   function handleClick() {
     getUserInfo(username)
@@ -25,11 +28,11 @@ export default function SearchInput() {
         width: '100%',
         height: '69px',
         '& > :not(style)': { m: 0, width: '100%' },
+        bgcolor: theme.palette.mode === 'light'? 'common.white' : 'common.lightBlack'
       }}
       noValidate
       autoComplete="off"
       mt='36px'
-      bgcolor='white'
       borderRadius='15px'
       boxShadow='-5px 8px 15px rgba(50, 50, 93, 0.15)'
     >
@@ -50,11 +53,12 @@ export default function SearchInput() {
               variant="contained" 
               sx={{
                 backgroundColor: 'common.button',
-                borderRadius: '10px',
+                // borderRadius: '10px',
                 width: '106px',
                 height: '50px',
                 fontSize: 'h3.fontSize',
                 textTransform: 'none',
+                color: 'text.light', 
               }}
               onClick={handleClick}
             >
@@ -77,6 +81,9 @@ export default function SearchInput() {
           },
           '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
             border: 'none',
+          },
+          '& .MuiInputBase-input::placeholder': {
+            color: theme.palette.mode === 'light'? 'text.placeHolder' : 'common.white',
           },
         }}
       />

@@ -14,5 +14,6 @@ export const getUserInfo = async (payload) =>  {
     return result.data
   } catch (error) {
     console.error('[Get user info failed]: ', error)
+    console.log(error)
   }
 }

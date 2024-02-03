@@ -3,9 +3,12 @@ import Button from '@mui/material/Button';
 import sunIcon from '../assets/icon-sun.svg'
 import moonIcon from '../assets/icon-moon.svg'
 import { Typography } from '@mui/material';
+import { useTheme } from '@emotion/react';
 
 // mode switch button inside Header component
-export default function ModeButton({mode, setMode}) {
+export default function ModeButton({setMode}) {
+  
+  const theme = useTheme()
 
   // common styles for Typography
   const commonStyles = {
@@ -19,20 +22,20 @@ export default function ModeButton({mode, setMode}) {
       <Button 
         variant="text" 
         onClick={() => {
-          if (mode === 'light') {
+          if (theme.palette.mode === 'light') {
             setMode('dark')
           } else {
             setMode('light')
           }
         }
       }>
-        {mode === 'light' ? 
+        {theme.palette.mode === 'light' ? 
           <>
             <Typography 
               variant='h4'
               sx={{ 
                 ...commonStyles,
-                color: 'text.light',
+                color: 'text.dark',
               }}
             >
               dark
@@ -44,7 +47,7 @@ export default function ModeButton({mode, setMode}) {
               variant='h4'
               sx={{ 
                 ...commonStyles,
-                color: 'text.dark',
+                color: 'text.light',
               }}
             >
               light
