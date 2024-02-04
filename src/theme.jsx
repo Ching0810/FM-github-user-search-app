@@ -13,6 +13,7 @@ const theme = createTheme({
     // text setting is for text color
     text: {
       dark: '#697C9A',
+      heavyDark: '#2B3442',
       light: '#ffffff',
       logo: '#222731',
       placeHolder: '#4B6A9B'
@@ -65,6 +66,13 @@ const theme = createTheme({
         // root could customize all Button setting
         root: {
           borderRadius: 10
+        }
+      }
+    },
+    MuiStack: {
+      styleOverrides: {
+        root: {
+          boxSizing: 'border-box'
         }
       }
     },

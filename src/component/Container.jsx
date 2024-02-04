@@ -18,20 +18,23 @@ export default function Container({setMode}) {
         alignItems: 'center',
         flexDirection: 'column',
         width: '100vw',
-        height: '100vh',
+        // use minHeight to let component display entirely when it greater than 100vh
+        minHeight: '100vh',
         bgcolor: theme.palette.mode === 'light' ? theme.palette.common.lightWhite : theme.palette.common.black
       }}
     >
       {/* this inside Box set application width */}
       <Box 
         width={{
-          sx: '573px',
+          xs: '573px',
           md: '730px'
         }}
         display= 'flex'
         flexDirection= 'column'
         justifyContent= 'center'
         alignItems= 'center'
+        boxSizing='border-box'
+        padding='30px 0'
       >
         <UserInfoProvider>
           <Header setMode={setMode} />

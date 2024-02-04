@@ -1,10 +1,8 @@
 import { useUserInfo } from "../context/userInfoContext"
 import { Typography, Stack, Box } from "@mui/material"
-import { useTheme } from "@emotion/react"
 
 export default function UserAccount() {
-  const {username, account, joinTime, isDesktop} = useUserInfo()
-  const theme = useTheme()
+  const {username, account, joinTime, isDesktop, theme} = useUserInfo()
 
   return (
     <>
