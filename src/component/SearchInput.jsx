@@ -5,16 +5,49 @@ import searchIcon from '../assets/icon-search.svg'
 import { getUserInfo } from '../API/api';
 import { useState } from 'react';
 import { useTheme } from '@emotion/react';
+import { useUserInfo } from "../context/userInfoContext"
 
 export default function SearchInput() {
-  const [username, setUsername] = useState('')
+  // state variable for type-in name
+  const [searchName, setSearchName] = useState('')
+
+  // get all set function from context
+  const {
+    setUsername, 
+    setAvatar, 
+    setAccount, 
+    setBio,
+    setJoinTime,
+    setFollower,
+    setFollowing,
+    setLocation,
+    setBlog,
+    setRepos,
+    setCompany,
+    setTwitter
+  } = useUserInfo()
 
   const theme = useTheme()
 
   function handleClick() {
-    getUserInfo(username)
+    getUserInfo(searchName)
     .then(result => {
-      console.log(result)
+      const createDate = result.created_at.slice(8,10)
+      const createMonth = result.created_at.slice(5,7)
+      const createYear = result.created_at.slice(0,4)
+      setUsername(result.login)
+      setAvatar(result.avatar_url)
+      setAccount(result.name === null?'null':result.name)
+      setBio(result.bio === null?'null':result.bio)
+      setJoinTime(`${createDate} ${createMonth} ${createYear}`)
+      setFollower(result.followers)
+      setFollowing(result.following)
+      setLocation(result.location === null?'null':result.location)
+      setBlog(result.blog === ""?'null':result.blog)
+      setRepos(result.public_repos)
+      setCompany(result.company === null?'null':result.company)
+      setTwitter(result.twitter_username === null?'null':result.twitter_username)
+      setSearchName('')
     })
   }
 
@@ -41,9 +74,12 @@ export default function SearchInput() {
         placeholder='Search Github username...'
         variant="outlined"
         fullWidth
-        value={username}
-        onChange={e => setUsername(e.target.value)}
+        value={searchName}
+        onChange={e => setSearchName(e.target.value)}
         InputProps={{
+          style: {
+            color: theme.palette.mode === 'light'? theme.palette.text.logo:theme.palette.common.white
+          },
           startAdornment: (
             <img src={searchIcon} style={{margin: '0 20px'}}/>
           ),
@@ -53,7 +89,6 @@ export default function SearchInput() {
               variant="contained" 
               sx={{
                 backgroundColor: 'common.button',
-                // borderRadius: '10px',
                 width: '106px',
                 height: '50px',
                 fontSize: 'h3.fontSize',

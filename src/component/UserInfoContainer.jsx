@@ -33,7 +33,7 @@ export default function UserInfoContainer () {
       {isDesktop?(
           <Stack direction='row' width='100%' spacing={4.5}>
             <UserAvatar/>
-            <Stack spacing={4}>
+            <Stack spacing={4} width='100%'>
               <Stack spacing={2.5}>
                 <UserAccount/>
                 <UserBio/>

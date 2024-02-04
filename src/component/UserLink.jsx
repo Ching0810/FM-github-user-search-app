@@ -45,7 +45,7 @@ export default function UserLink() {
       {renderLink(theme.palette.mode === 'light'? locationIcon: locationIconWhite, location)}
       {renderLink(theme.palette.mode === 'light'? twitterIcon: twitterIconWhite, twitter)}
       {renderLink(theme.palette.mode === 'light'? blogIcon: blogIconWhite, blog)}
-      {renderLink(theme.palette.mode === 'light'? companyIcon: companyIconWhite, `@${company}`)}
+      {renderLink(theme.palette.mode === 'light'? companyIcon: companyIconWhite, company)}
     </Grid>
   )
 }
