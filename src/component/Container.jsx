@@ -2,12 +2,11 @@ import Header from './Header';
 import SearchInput from './SearchInput';
 import UserInfoContainer from './UserInfoContainer';
 import { Box } from '@mui/material';
-import { useTheme } from '@emotion/react';
-import { UserInfoProvider } from '../context/userInfoContext';
+import { useReference } from '../context/userInfoContext';
 
 // container for contain three main items of entire app: header, search input, result section
 export default function Container({setMode}) {
-  const theme = useTheme()
+  const {theme} = useReference()
 
   return (
     // this outer Box set entire background
@@ -20,7 +19,7 @@ export default function Container({setMode}) {
         width: '100vw',
         // use minHeight to let component display entirely when it greater than 100vh
         minHeight: '100vh',
-        bgcolor: theme.palette.mode === 'light' ? theme.palette.common.lightWhite : theme.palette.common.black
+        bgcolor: theme.palette.mode === 'light' ? 'common.lightWhite' : 'common.black'
       }}
     >
       {/* this inside Box set application width */}
@@ -36,11 +35,9 @@ export default function Container({setMode}) {
         boxSizing='border-box'
         padding='30px 0'
       >
-        <UserInfoProvider>
-          <Header setMode={setMode} />
-          <SearchInput />
-          <UserInfoContainer />
-        </UserInfoProvider>
+        <Header setMode={setMode} />
+        <SearchInput />
+        <UserInfoContainer />
       </Box>
     </Box>
   )

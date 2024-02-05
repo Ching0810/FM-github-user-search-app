@@ -1,5 +1,5 @@
 import { Grid, Typography, Stack } from "@mui/material"
-import { useUserInfo } from "../context/userInfoContext"
+import { useUserInfo, useReference } from "../context/userInfoContext"
 import Image from "mui-image"
 import locationIcon from '../assets/icon-location.svg'
 import locationIconWhite from '../assets/icon-location-white.svg'
@@ -11,7 +11,15 @@ import companyIcon from '../assets/icon-company.svg'
 import companyIconWhite from '../assets/icon-company-white.svg'
 
 export default function UserLink() {
-  const {location, twitter, blog, company, theme} = useUserInfo()
+  const {
+    location, 
+    twitter, 
+    blog, 
+    company
+  } = useUserInfo()
+  const {theme} = useReference()
+
+  // single link blueprint
   const renderLink = (icon, text) => {
     return(
       <Grid item xs={6}>

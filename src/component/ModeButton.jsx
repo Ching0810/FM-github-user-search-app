@@ -3,12 +3,12 @@ import Button from '@mui/material/Button';
 import sunIcon from '../assets/icon-sun.svg'
 import moonIcon from '../assets/icon-moon.svg'
 import { Typography } from '@mui/material';
-import { useTheme } from '@emotion/react';
+import { useReference } from '../context/userInfoContext';
 
 // mode switch button inside Header component
 export default function ModeButton({setMode}) {
   
-  const theme = useTheme()
+  const {theme} = useReference()
 
   // common styles for Typography
   const commonStyles = {

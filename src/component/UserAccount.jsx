@@ -1,8 +1,16 @@
-import { useUserInfo } from "../context/userInfoContext"
+import { useUserInfo, useReference } from "../context/userInfoContext"
 import { Typography, Stack, Box } from "@mui/material"
 
 export default function UserAccount() {
-  const {username, account, joinTime, isDesktop, theme} = useUserInfo()
+  const {
+    username, 
+    account, 
+    joinTime
+  } = useUserInfo()
+  const {
+    isDesktop, 
+    theme
+  } = useReference()
 
   return (
     <>

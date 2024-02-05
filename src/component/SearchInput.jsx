@@ -4,49 +4,21 @@ import { Button } from '@mui/material';
 import searchIcon from '../assets/icon-search.svg'
 import { getUserInfo } from '../API/api';
 import { useState } from 'react';
-import { useTheme } from '@emotion/react';
-import { useUserInfo } from "../context/userInfoContext"
+import { useUserInfoReducer, actions, useReference } from "../context/userInfoContext"
 
 export default function SearchInput() {
   // state variable for type-in name
   const [searchName, setSearchName] = useState('')
 
-  // get all set function from context
-  const {
-    setUsername, 
-    setAvatar, 
-    setAccount, 
-    setBio,
-    setJoinTime,
-    setFollower,
-    setFollowing,
-    setLocation,
-    setBlog,
-    setRepos,
-    setCompany,
-    setTwitter
-  } = useUserInfo()
+  const dispatch = useUserInfoReducer()
 
-  const theme = useTheme()
+  const {theme} = useReference()
 
+  // send both API result & event type as payload into dispatch function
   function handleClick() {
     getUserInfo(searchName)
     .then(result => {
-      const createDate = result.created_at.slice(8,10)
-      const createMonth = result.created_at.slice(5,7)
-      const createYear = result.created_at.slice(0,4)
-      setUsername(result.login)
-      setAvatar(result.avatar_url)
-      setAccount(result.name === null?'null':result.name)
-      setBio(result.bio === null?'null':result.bio)
-      setJoinTime(`${createDate} ${createMonth} ${createYear}`)
-      setFollower(result.followers)
-      setFollowing(result.following)
-      setLocation(result.location === null?'null':result.location)
-      setBlog(result.blog === ""?'null':result.blog)
-      setRepos(result.public_repos)
-      setCompany(result.company === null?'null':result.company)
-      setTwitter(result.twitter_username === null?'null':result.twitter_username)
+      dispatch({type: actions.GET_USER_INFO_SUCCESS, payload: result})
       setSearchName('')
     })
   }
@@ -78,7 +50,8 @@ export default function SearchInput() {
         onChange={e => setSearchName(e.target.value)}
         InputProps={{
           style: {
-            color: theme.palette.mode === 'light'? theme.palette.text.logo:theme.palette.common.white
+            color: theme.palette.mode === 'light'? theme.palette.text.logo:theme.palette.common.white,
+            fontSize: theme.typography.h3.fontSize
           },
           startAdornment: (
             <img src={searchIcon} style={{margin: '0 20px'}}/>

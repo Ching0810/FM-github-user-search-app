@@ -1,8 +1,9 @@
 import { Typography } from "@mui/material"
-import { useUserInfo } from "../context/userInfoContext"
+import { useUserInfo, useReference } from "../context/userInfoContext"
 
 export default function UserBio() {
-  const {theme, bio} = useUserInfo()
+  const {bio} = useUserInfo()
+  const {theme} = useReference()
 
   return (
     <Typography

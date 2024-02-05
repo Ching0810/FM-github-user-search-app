@@ -1,16 +1,16 @@
 import { Box, Stack } from "@mui/material"
-import { useUserInfo } from "../context/userInfoContext"
 import UserAvatar from "./UserAvatar"
 import UserAccount from "./UserAccount"
 import UserBio from "./UserBio"
 import UserFollowRepos from "./UserFollowRepos"
 import UserLink from "./UserLink"
+import { useReference } from "../context/userInfoContext"
 
 export default function UserInfoContainer () {
   const {
     isDesktop,
     theme
-  } = useUserInfo()
+  } = useReference()
 
   return (
     // container for entire UserInfo section

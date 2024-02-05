@@ -1,8 +1,13 @@
 import { Grid, Typography } from "@mui/material"
-import { useUserInfo } from "../context/userInfoContext"
+import { useUserInfo, useReference } from "../context/userInfoContext"
 
 export default function UserFollowRepos() {
-  const {repos, follower, following, theme} = useUserInfo()
+  const {
+    repos, 
+    follower, 
+    following
+  } = useUserInfo()
+  const {theme} = useReference()
 
   const renderItem = (label, count) => {
     return(
