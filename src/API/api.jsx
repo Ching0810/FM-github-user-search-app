@@ -11,9 +11,8 @@ export const getUserInfo = async (payload) =>  {
         'X-GitHub-Api-Version': '2022-11-28'
       }
     })
-    return result.data
+    return result
   } catch (error) {
-    console.error('[Get user info failed]: ', error)
-    console.log(error)
+    return error
   }
 }

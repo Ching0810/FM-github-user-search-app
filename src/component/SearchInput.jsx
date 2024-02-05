@@ -1,25 +1,37 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Button } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 import searchIcon from '../assets/icon-search.svg'
 import { getUserInfo } from '../API/api';
 import { useState } from 'react';
-import { useUserInfoReducer, actions, useReference } from "../context/userInfoContext"
+import { 
+  useUserInfoReducer, 
+  actions, 
+  useReference, 
+  useUserInfo 
+} from "../context/userInfoContext"
 
 export default function SearchInput() {
   // state variable for type-in name
   const [searchName, setSearchName] = useState('')
 
-  const dispatch = useUserInfoReducer()
+  const {dispatch} = useUserInfoReducer()
 
-  const {theme} = useReference()
+  const {isFetchSuccess} = useUserInfo()
+
+  const {theme, defaultUserInfo} = useReference()
 
   // send both API result & event type as payload into dispatch function
   function handleClick() {
     getUserInfo(searchName)
     .then(result => {
-      dispatch({type: actions.GET_USER_INFO_SUCCESS, payload: result})
-      setSearchName('')
+      if (result.status === 200) {
+        dispatch({type: actions.GET_USER_INFO_SUCCESS, payload: result.data})
+        setSearchName('')
+      } else if (result.status === 404) {
+        dispatch({type: actions.GET_USER_INFO_FAIL, payload: defaultUserInfo})
+        console.log('Resource not found')
+      }
     })
   }
 
@@ -57,21 +69,35 @@ export default function SearchInput() {
             <img src={searchIcon} style={{margin: '0 20px'}}/>
           ),
           endAdornment: (
-            <Button 
-              // type="submit" 
-              variant="contained" 
-              sx={{
-                backgroundColor: 'common.button',
-                width: '106px',
-                height: '50px',
-                fontSize: 'h3.fontSize',
-                textTransform: 'none',
-                color: 'text.light', 
-              }}
-              onClick={handleClick}
-            >
-              Search
-            </Button>
+            <Stack spacing={2} direction='row' alignItems='center'>
+              {/* conditional render no results alert then fetch user info fail */}
+              {isFetchSuccess
+                ?<></>
+                :<Typography 
+                  noWrap
+                  variant='h3'
+                  color='text.alert'
+                  fontWeight={700}
+                >
+                  No results
+                </Typography>
+              }
+              <Button 
+                // type="submit" 
+                variant="contained" 
+                sx={{
+                  backgroundColor: 'common.button',
+                  width: '106px',
+                  height: '50px',
+                  fontSize: 'h3.fontSize',
+                  textTransform: 'none',
+                  color: 'text.light', 
+                }}
+                onClick={handleClick}
+              >
+                Search
+              </Button>
+            </Stack>
           ),
         }}
         sx={{

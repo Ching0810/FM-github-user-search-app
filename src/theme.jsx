@@ -16,7 +16,8 @@ const theme = createTheme({
       heavyDark: '#2B3442',
       light: '#ffffff',
       logo: '#222731',
-      placeHolder: '#4B6A9B'
+      placeHolder: '#4B6A9B',
+      alert: '#F74646'
     },
   },
   // custom breakpoint value
