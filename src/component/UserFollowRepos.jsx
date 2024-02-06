@@ -12,7 +12,7 @@ export default function UserFollowRepos() {
   const renderItem = (label, count) => {
     return(
       <Grid item xs={4}>
-        <Stack alignItems='center'>
+        <Stack alignItems={isTablet?'flex-start':'center'}>
           <Typography 
             variant="h4" 
             sx={{

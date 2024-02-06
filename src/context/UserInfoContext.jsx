@@ -27,6 +27,35 @@ const defaultUserInfo = {
   isFetchSuccess: true
 }
 
+function getMonthText(string) {
+  switch (string) {
+    case '01':
+      return 'Jan'
+    case '02':
+      return 'Feb'
+    case '03':
+      return 'Mar'
+    case '04':
+      return 'Apr'
+    case '05':
+      return 'May'
+    case '06':
+      return 'Jun'
+    case '07':
+      return 'Jul'
+    case '08':
+      return 'Aug'
+    case '09':
+      return 'Sept'
+    case '10':
+      return 'Oct'
+    case '11':
+      return 'Nov'
+    case '12':
+      return 'Dec'
+  }
+}
+
 // reducer
 function reducer(state, action) {
   const type = action.type
@@ -50,11 +79,12 @@ function reducer(state, action) {
         public_repos,
         twitter_username
       } = payload
+      const formatTime = `${created_at.slice(8,10)} ${getMonthText(created_at.slice(5,7))} ${created_at.slice(0,4)}`
       newUserInfo.username = login
       newUserInfo.account = name === null? 'null': name
       newUserInfo.avatar = avatar_url
       newUserInfo.bio = bio === null? 'null': bio
-      newUserInfo.joinTime = created_at
+      newUserInfo.joinTime = formatTime
       newUserInfo.follower = followers
       newUserInfo.following = following
       newUserInfo.location = location === null? 'null': location
@@ -95,7 +125,7 @@ export const UserInfoProvider = ({children}) => {
     isDesktop: isDesktop,
     isTablet: isTablet,
     theme: theme,
-    defaultUserInfo: defaultUserInfo
+    defaultUserInfo: defaultUserInfo,
   }
 
   return (

@@ -22,7 +22,9 @@ export default function SearchInput() {
   const {theme, defaultUserInfo, isTablet} = useReference()
 
   // send both API result & event type as payload into dispatch function
-  function handleClick() {
+  // both button onClick and Enter key down event would trigger this function
+  function handleClick(e) {
+    e.preventDefault()
     getUserInfo(searchName)
     .then(result => {
       if (result.status === 200) {
@@ -45,13 +47,18 @@ export default function SearchInput() {
         width: '100%',
         height: isTablet?'69px': '60px',
         '& > :not(style)': { m: 0, width: '100%' },
-        bgcolor: theme.palette.mode === 'light'? 'common.white' : 'common.lightBlack'
+        bgcolor: theme.palette.mode === 'light'? 'common.white' : 'common.lightBlack',
       }}
       noValidate
       autoComplete="off"
       mt='36px'
       borderRadius='15px'
       boxShadow='-5px 8px 15px rgba(50, 50, 93, 0.15)'
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+          handleClick(e);
+        }
+      }}
     >
       <TextField
         id="search-input"
@@ -88,6 +95,7 @@ export default function SearchInput() {
               <Button 
                 // type="submit" 
                 variant="contained" 
+                disabled={searchName.length === 0? true: false}
                 sx={{
                   backgroundColor: 'common.button',
                   width: isTablet?'106px':'80px',
@@ -96,7 +104,7 @@ export default function SearchInput() {
                   textTransform: 'none',
                   color: 'text.light', 
                 }}
-                onClick={handleClick}
+                onClick={e=>handleClick(e)}
               >
                 Search
               </Button>

@@ -17,7 +17,8 @@ const theme = createTheme({
       light: '#ffffff',
       logo: '#222731',
       placeHolder: '#4B6A9B',
-      alert: '#F74646'
+      alert: '#F74646',
+      hoverDark:'#90A4D4'
     },
   },
   // custom breakpoint value
@@ -67,8 +68,14 @@ const theme = createTheme({
         
         // root could customize all Button setting
         root: {
-          borderRadius: 10
-        }
+          borderRadius: 10,
+          '&.Mui-disabled': {
+            backgroundColor:'rgb(0,121,255,0.3)'
+          },
+          '&:hover': {
+            backgroundColor:'rgb(0,121,255,0.5)'
+          }
+        },
       }
     },
     MuiStack: {
