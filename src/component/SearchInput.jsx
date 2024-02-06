@@ -19,7 +19,7 @@ export default function SearchInput() {
 
   const {isFetchSuccess} = useUserInfo()
 
-  const {theme, defaultUserInfo} = useReference()
+  const {theme, defaultUserInfo, isTablet} = useReference()
 
   // send both API result & event type as payload into dispatch function
   function handleClick() {
@@ -43,7 +43,7 @@ export default function SearchInput() {
         flexDirection: 'column', 
         justifyContent: 'center',
         width: '100%',
-        height: '69px',
+        height: isTablet?'69px': '60px',
         '& > :not(style)': { m: 0, width: '100%' },
         bgcolor: theme.palette.mode === 'light'? 'common.white' : 'common.lightBlack'
       }}
@@ -63,10 +63,13 @@ export default function SearchInput() {
         InputProps={{
           style: {
             color: theme.palette.mode === 'light'? theme.palette.text.logo:theme.palette.common.white,
-            fontSize: theme.typography.h3.fontSize
+            fontSize: isTablet? theme.typography.h3.fontSize:theme.typography.h4.fontSize 
           },
           startAdornment: (
-            <img src={searchIcon} style={{margin: '0 20px'}}/>
+            <img 
+              src={searchIcon} 
+              style={{margin: isTablet?'0 20px': '0 10px'}}
+            />
           ),
           endAdornment: (
             <Stack spacing={2} direction='row' alignItems='center'>
@@ -87,9 +90,9 @@ export default function SearchInput() {
                 variant="contained" 
                 sx={{
                   backgroundColor: 'common.button',
-                  width: '106px',
-                  height: '50px',
-                  fontSize: 'h3.fontSize',
+                  width: isTablet?'106px':'80px',
+                  height: isTablet?'50px':'46px',
+                  fontSize: isTablet?'h3.fontSize':'h4.fontSize',
                   textTransform: 'none',
                   color: 'text.light', 
                 }}
@@ -104,8 +107,8 @@ export default function SearchInput() {
           '& .MuiOutlinedInput-root': {
             borderColor: 'transparent',
             boxShadow: 'none',
-            paddingLeft: '15px',
-            paddingRight: '10px'
+            paddingLeft: isTablet?'15px':'0px',
+            paddingRight: isTablet?'10px':'7px'
           },
           '& .MuiOutlinedInput-notchedOutline': {
             border: 'none',

@@ -3,11 +3,11 @@ import { useUserInfo, useReference } from "../context/userInfoContext"
 
 export default function UserBio() {
   const {bio} = useUserInfo()
-  const {theme} = useReference()
+  const {theme, isTablet} = useReference()
 
   return (
     <Typography
-      variant="h3"
+      variant={isTablet?"h3":'h4'}
       sx={{
         color: theme.palette.mode === 'light'? 'text.placeHolder': 'common.white',
       }}

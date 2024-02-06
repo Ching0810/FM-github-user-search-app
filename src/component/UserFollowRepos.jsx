@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material"
+import { Grid, Stack, Typography } from "@mui/material"
 import { useUserInfo, useReference } from "../context/userInfoContext"
 
 export default function UserFollowRepos() {
@@ -7,27 +7,30 @@ export default function UserFollowRepos() {
     follower, 
     following
   } = useUserInfo()
-  const {theme} = useReference()
+  const {theme, isTablet} = useReference()
 
   const renderItem = (label, count) => {
     return(
       <Grid item xs={4}>
-        <Typography 
-          variant="h4" 
-          sx={{
-            color: theme.palette.mode === 'light'? 'text.placeHolder' : 'common.white',
-          }}
-        >
-          {label}
-        </Typography>
-        <Typography 
-          variant="h1"
-          sx={{
-            color: theme.palette.mode === 'light'? 'text.placeHolder' : 'common.white',
-          }}
-        >
-          {count}
-        </Typography>
+        <Stack alignItems='center'>
+          <Typography 
+            variant="h4" 
+            sx={{
+              color: theme.palette.mode === 'light'? 'text.placeHolder' : 'common.white',
+            }}
+          >
+            {label}
+          </Typography>
+          <Typography 
+            variant={isTablet?"h1":'h4'}
+            fontWeight={700}
+            sx={{
+              color: theme.palette.mode === 'light'? 'text.heavyDark' : 'common.white',
+            }}
+          >
+            {count}
+          </Typography>
+        </Stack>
       </Grid>
     )
   }
@@ -39,7 +42,7 @@ export default function UserFollowRepos() {
       bgcolor='common.lightWhite'
       width='100%'
       borderRadius='10px'
-      padding='16px 24px'
+      padding={isTablet?'16px 24px':'16px 4px'}
       sx={{
         bgcolor: theme.palette.mode === 'light'? 'common.lightWhite' : 'common.black',
       }}

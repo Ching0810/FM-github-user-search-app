@@ -9,6 +9,7 @@ export default function UserAccount() {
   } = useUserInfo()
   const {
     isDesktop, 
+    isTablet,
     theme
   } = useReference()
 
@@ -18,7 +19,7 @@ export default function UserAccount() {
         <Stack width='100%' display='flex' flexDirection='row'>
           <Stack direction='column' spacing='2px'>
             <Typography 
-              variant="h1" 
+              variant="h1"
               sx={{
                 color: theme.palette.mode === 'light'? 'common.black': 'common.white',
               }}
@@ -46,7 +47,8 @@ export default function UserAccount() {
       ):(
         <Stack direction='column' spacing='2px'>
           <Typography 
-            variant="h1" 
+            variant={isTablet?'h1':'h3'}
+            fontWeight={700}
             sx={{
               color: theme.palette.mode === 'light'? 'common.black': 'common.white',
             }}
@@ -54,13 +56,13 @@ export default function UserAccount() {
             {username}
           </Typography>
           <Typography
-            variant="h3"
+            variant={isTablet?'h3':'h4'}
             color='common.button'
           >
             @{account}
           </Typography>
           <Typography 
-            variant="h3" 
+            variant={isTablet?'h3':'h4'}
             lineHeight={theme.typography.h1.lineHeight}
             sx={{
               color: theme.palette.mode === 'light'? 'text.dark': 'common.white',

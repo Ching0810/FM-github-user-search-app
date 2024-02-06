@@ -17,27 +17,33 @@ export default function UserLink() {
     blog, 
     company
   } = useUserInfo()
-  const {theme} = useReference()
+  const {theme, isTablet} = useReference()
 
-  // single link blueprint
-  const renderLink = (icon, text) => {
-    return(
-      <Grid item xs={6}>
+  const icons = {
+    location: theme.palette.mode === 'light' ? locationIcon : locationIconWhite,
+    twitter: theme.palette.mode === 'light' ? twitterIcon : twitterIconWhite,
+    blog: theme.palette.mode === 'light' ? blogIcon : blogIconWhite,
+    company: theme.palette.mode === 'light' ? companyIcon : companyIconWhite,
+  };
+
+  const LinkItem = ({ icon, text }) => {
+    return (
+      <Grid item xs={isTablet? 6: 12}>
         <Stack direction='row' spacing={2} alignItems='center'>
           <Stack height={20} width={20}>
-            <Image 
-              src={icon} 
-              duration={0} 
-              height={20} 
-              width={20} 
+            <Image  
+              src={icon}  
+              duration={0}  
+              height={20}  
+              width={20}  
               fit="contain"
             />
           </Stack>
           <Stack flexWrap='wrap'>
-            <Typography 
+            <Typography  
               variant="h4"
               sx={{
-                color: theme.palette.mode === 'light'? 'text.placeHolder' : 'common.white',
+                color: theme.palette.mode === 'light' ? 'text.placeHolder' : 'common.white',
               }}
             >
               {text}
@@ -49,11 +55,11 @@ export default function UserLink() {
   }
 
   return (
-    <Grid container rowSpacing={2.5}>
-      {renderLink(theme.palette.mode === 'light'? locationIcon: locationIconWhite, location)}
-      {renderLink(theme.palette.mode === 'light'? twitterIcon: twitterIconWhite, twitter)}
-      {renderLink(theme.palette.mode === 'light'? blogIcon: blogIconWhite, blog)}
-      {renderLink(theme.palette.mode === 'light'? companyIcon: companyIconWhite, company)}
+    <Grid container rowSpacing={isTablet?2.5:1.5}>
+      <LinkItem icon={icons.location} text={location} />
+      <LinkItem icon={icons.twitter} text={twitter} />
+      <LinkItem icon={icons.blog} text={blog} />
+      <LinkItem icon={icons.company} text={company} />
     </Grid>
   )
 }

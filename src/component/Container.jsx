@@ -6,14 +6,14 @@ import { useReference } from '../context/userInfoContext';
 
 // container for contain three main items of entire app: header, search input, result section
 export default function Container({setMode}) {
-  const {theme} = useReference()
+  const {theme, isTablet} = useReference()
 
   return (
     // this outer Box set entire background
     <Box
       sx={{
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: isTablet?'center':'top',
         alignItems: 'center',
         flexDirection: 'column',
         width: '100vw',
@@ -25,7 +25,8 @@ export default function Container({setMode}) {
       {/* this inside Box set application width */}
       <Box 
         width={{
-          xs: '573px',
+          xs: '327px',
+          sm: '573px',
           md: '730px'
         }}
         display= 'flex'
