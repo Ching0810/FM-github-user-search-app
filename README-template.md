@@ -1,26 +1,32 @@
-# Frontend Mentor - GitHub user search app solution
+# GitHub user search app project
 
-This is a solution to the [GitHub user search app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/github-user-search-app-Q09YOgaH6). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+This is a practice project from Frontend Mentor.
+</br>Personal expected skills to practice through this project:
+
+- React useReducer hook for state management
+- custom CSS with theme setting
+- light & dark mode switch
+- RWD setting for mobile, tablet & desktop mode
 
 ## Table of contents
 
 - [Overview](#overview)
-  - [The challenge](#the-challenge)
+  - [Feature](#feature)
   - [Screenshot](#screenshot)
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
+    - [useReducer](#usereducer-hook)
+    - [custom CSS theme setting](#custom-css-theme-setting)
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
-
 ## Overview
 
-### The challenge
+### Feature
 
 Users should be able to:
 
@@ -29,87 +35,274 @@ Users should be able to:
 - Search for GitHub users by their username
 - See relevant user information based on their search
 - Switch between light and dark themes
-- **Bonus**: Have the correct color scheme chosen for them based on their computer preferences. _Hint_: Research `prefers-color-scheme` in CSS.
+- Click and redirect to blog URL
 
 ### Screenshot
 
-![](./screenshot.jpg)
+Desktop mode:
+</br>
+<img width='300px' src='./public/screenshots/Github_user_Desktop_light.png'>
+<img width='300px' src='./public/screenshots/Github_user_Desktop_dark.png'>
 
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
+Tablet mode:
+</br>
+<img width='300px' src='./public/screenshots/Github_user_Tablet_light.png'>
+<img width='300px' src='./public/screenshots/Github_user_Tablet_dark.png'>
 
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+Mobile mode:
+</br>
+<img width='300px' src='./public/screenshots/Github_user_Mobile_light.png'>
+<img width='300px' src='./public/screenshots/Github_user_Mobile_dark.png'>
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [https://tourmaline-licorice-f4baee.netlify.app/](https://tourmaline-licorice-f4baee.netlify.app/)
 
 ## My process
 
 ### Built with
 
-- Semantic HTML5 markup
+- [React](https://reactjs.org/) - framework
+- [MUI](https://mui.com/) - UI library
 - CSS custom properties
-- Flexbox
-- CSS Grid
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
 
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+## What I learned
 
-### What I learned
+### useReducer hook
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+- why useReducer hook? advantages?
 
-To see how you can add code snippets, see below:
+  - group related pieces of state into a single object: organizing and managing state more efficiently
+  - handle multiple state changes in response to different actions in a more organized and maintainable way: avoids handling events separately in individual components, contributing to easier maintenance
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
-```
+- Syntax:
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+  ```javascript
+  import { useReducer } from "react";
+  export default function Demo() {
+    const [state, dispatch] = useReducer(reducer, initialState);
+    // dispatch is like setState function which could "manipulate" state
+    // useReducer take 2 reqired arguement: reducer function & initial state
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+    return <>...</>;
+  }
+  ```
 
-### Continued development
+  1. Reducer Function:
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+  - Takes two arguments: the current state and an action.
+  - Evaluates the action type and performs state manipulation based on the action.
+  - Returns the updated state.</br>
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+  2. Dispatch Function:
 
-### Useful resources
+  - Takes one argument: an action.
+  - Sends the action to the reducer function for state manipulation.
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+  3. State Update:
 
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+  - After the reducer processes the action and updates the state, the component re-renders with the new state.
+
+  4. Payload:
+
+  - If additional data (payload) is needed for state manipulation, it's common to include it as part of the action object. The action object typically has a type property to indicate the action type and may include other properties like payload.
+
+- useReducer login in this project:
+
+  ```javascript
+  import { createContext, useContext, useReducer } from "react";
+  // ...
+
+  // action: defined all possible actions
+  export const actions = {
+    GET_USER_INFO_SUCCESS: 'GET_USER_INFO_SUCCESS',
+    GET_USER_INFO_FAIL: 'GET_USER_INFO_FAIL',
+  }
+
+  // default variable for reducer state
+  // isFetchSuccess variable for determine fetch result
+  const defaultUserInfo = {
+    username: 'The Octocat',
+    account: 'octocat',
+    ...
+  }
+
+  // reducer function
+  function reducer(state, action) {
+    const type = action.type
+    const payload = action.payload
+
+    switch (type) {
+      // when fetch success, set fetch data for render & set isFetchSuccess to true
+      case actions.GET_USER_INFO_SUCCESS: {
+        const newUserInfo = JSON.parse(JSON.stringify(state))
+        const {
+          login,
+          avatar_url,
+          ...
+        } = payload
+        newUserInfo.username = login
+        newUserInfo.account = name === null? 'null': name
+        ...
+        return newUserInfo
+      }
+      // when fetch fail, set defaultUserInfoState for render & set isFetchSuccess to true
+      case actions.GET_USER_INFO_FAIL: {
+        const newUserInfo = JSON.parse(JSON.stringify(defaultUserInfo))
+        newUserInfo.isFetchSuccess = false
+        return newUserInfo
+      }
+      default: {
+        console.log('default')
+        return state
+      }
+    }
+  }
+
+  // context
+  const UserInfoReducerContext = createContext()
+
+  export const UserInfoProvider = ({children}) => {
+
+    const [userInfoState, dispatch] = useReducer(reducer, defaultUserInfo)
+
+    ...
+
+    return (
+      // only need to provide dispatch function to children components
+      <UserInfoReducerContext.Provider value={{dispatch}}>
+        {children}
+      </UserInfoReducerContext.Provider>
+    )
+  }
+
+  ...
+
+  export const useUserInfoReducer = () => useContext(UserInfoReducerContext)
+  ```
+
+  ```javascript
+  // children component
+  export default function SearchInput() {
+    const {dispatch} = useUserInfoReducer()
+
+    // send both API result & event type as payload into dispatch function
+    // both button onClick and Enter key down event would trigger this function
+    function handleClick(e) {
+      e.preventDefault()
+      getUserInfo(searchName)
+      .then(result => {
+        if (result.status === 200) {
+          dispatch({type: actions.GET_USER_INFO_SUCCESS, payload: result.data})
+          setSearchName('')
+        } else if (result.status === 404) {
+          dispatch({type: actions.GET_USER_INFO_FAIL, payload: {}})
+          console.log('Resource not found')
+        }
+      })
+    }
+
+    return (
+      ...
+      <Button
+        // type="submit"
+        variant="contained"
+        disabled={searchName.length === 0? true: false}
+        sx={{
+          backgroundColor: 'common.button',
+          width: isTablet?'106px':'80px',
+          height: isTablet?'50px':'46px',
+          fontSize: isTablet?'h3.fontSize':'h4.fontSize',
+          textTransform: 'none',
+          color: 'text.light',
+        }}
+        onClick={e=>handleClick(e)}
+      >
+        Search
+      </Button>
+      ...
+    )
+  }
+  ```
+
+### custom CSS theme setting
+
+- createTheme hook & MUI default theme setting
+
+  - theme structure & style overrides from MUI document
+
+    ```javascript
+    import { createTheme } from "@mui/material";
+
+    const theme = createTheme({
+      palette: {
+        common: {
+          button: '#0079FF',
+          ...
+        },
+        text: {
+          dark: '#697C9A',
+          ...
+        },
+      },
+      breakpoints: {
+        values: {
+          xs: 0,
+          ...
+        }
+      },
+      typography: {
+        fontFamily: 'Space Mono',
+        fontSize:15,
+        fontWeight: 400,
+        lineHeight: 25/15,
+        h1: {
+          fontSize: 26,
+          ...
+        },
+        ...
+      },
+      components: {
+        // customize Button component setting
+        MuiButton: {
+          styleOverrides: {
+            root: {
+              borderRadius: 10,
+              ...
+            },
+          }
+        },
+        MuiStack: {
+          styleOverrides: {
+            root: {
+              boxSizing: 'border-box'
+              ...
+            }
+          }
+        },
+      }
+    })
+
+    export default theme
+    ```
+
+    then any component could import this theme setting through useTheme hook
+
+## Continued development
+
+- Component refactoring
+
+## Useful resources
+
+- [MUI theme setting](https://www.youtube.com/watch?v=SUEkAOuQZTQ) - tutorial for built theme setting provider for entire application
+- [MUI theme setting](https://mui.com/material-ui/customization/default-theme/) - MUI documentation about default theme setting
+- [useReducer hook](https://www.youtube.com/watch?v=rgp_iCVS8ys&t=61s) - tutorial for React useReducer hook syntax and concept, including simple example code
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
+- Ching0810 - [https://github.com/Ching0810](https://github.com/Ching0810)
 
 ## Acknowledgments
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+Currently none
