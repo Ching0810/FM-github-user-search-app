@@ -7,6 +7,7 @@ This is a practice project from Frontend Mentor.
 - custom CSS with theme setting
 - light & dark mode switch
 - RWD setting for mobile, tablet & desktop mode
+- error handling
 
 ## Table of contents
 
