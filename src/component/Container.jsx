@@ -2,7 +2,7 @@ import Header from './Header';
 import SearchInput from './SearchInput';
 import UserInfoContainer from './UserInfoContainer';
 import { Box } from '@mui/material';
-import { useReference } from '../context/userInfoContext';
+import { useReference } from '../UserInfoContext';
 
 // container for contain three main items of entire app: header, search input, result section
 export default function Container({setMode}) {

@@ -9,7 +9,7 @@ import {
   actions, 
   useReference, 
   useUserInfo 
-} from "../context/userInfoContext"
+} from "../UserInfoContext"
 
 export default function SearchInput() {
   // state variable for type-in name
@@ -19,7 +19,7 @@ export default function SearchInput() {
 
   const {isFetchSuccess} = useUserInfo()
 
-  const {theme, defaultUserInfo, isTablet} = useReference()
+  const {theme, isTablet} = useReference()
 
   // send both API result & event type as payload into dispatch function
   // both button onClick and Enter key down event would trigger this function
@@ -31,7 +31,7 @@ export default function SearchInput() {
         dispatch({type: actions.GET_USER_INFO_SUCCESS, payload: result.data})
         setSearchName('')
       } else if (result.status === 404) {
-        dispatch({type: actions.GET_USER_INFO_FAIL, payload: defaultUserInfo})
+        dispatch({type: actions.GET_USER_INFO_FAIL, payload: {}})
         console.log('Resource not found')
       }
     })

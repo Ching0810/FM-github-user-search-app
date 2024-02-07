@@ -1,4 +1,4 @@
-import { useUserInfo, useReference } from "../context/userInfoContext"
+import { useUserInfo, useReference } from "../UserInfoContext"
 import { Typography, Stack, Box } from "@mui/material"
 
 export default function UserAccount() {

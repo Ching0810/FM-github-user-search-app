@@ -1,4 +1,4 @@
-import { useUserInfo, useReference } from "../context/userInfoContext"
+import { useUserInfo, useReference } from "../UserInfoContext"
 import Image from "mui-image"
 import { Box } from "@mui/material"
 

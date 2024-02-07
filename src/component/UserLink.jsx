@@ -1,5 +1,5 @@
 import { Grid, Typography, Stack } from "@mui/material"
-import { useUserInfo, useReference } from "../context/userInfoContext"
+import { useUserInfo, useReference } from "../UserInfoContext"
 import Image from "mui-image"
 import locationIcon from '../assets/icon-location.svg'
 import locationIconWhite from '../assets/icon-location-white.svg'

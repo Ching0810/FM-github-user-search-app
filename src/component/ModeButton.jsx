@@ -6,7 +6,7 @@ import moonIcon from '../assets/icon-moon.svg'
 import moonHoverIcon from '../assets/icon-moon-hover.svg'
 import Image from 'mui-image';
 import { Typography } from '@mui/material';
-import { useReference } from '../context/userInfoContext';
+import { useReference } from '../UserInfoContext';
 import { useState } from 'react';
 
 // mode switch button inside Header component

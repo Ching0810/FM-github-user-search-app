@@ -1,5 +1,5 @@
 import { Grid, Stack, Typography } from "@mui/material"
-import { useUserInfo, useReference } from "../context/userInfoContext"
+import { useUserInfo, useReference } from "../UserInfoContext"
 
 export default function UserFollowRepos() {
   const {

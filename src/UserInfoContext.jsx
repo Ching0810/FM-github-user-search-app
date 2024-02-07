@@ -1,7 +1,7 @@
 import { createContext, useContext, useReducer } from "react";
 import { useMediaQuery } from "@mui/material"
 import { useTheme } from "@emotion/react";
-import defaultAvatar from '../assets/Github icon.png'
+import defaultAvatar from './assets/Github icon.png'
 
 // action: defined all possible actions
 export const actions = {
@@ -117,7 +117,7 @@ export const UserInfoProvider = ({children}) => {
 
   const [userInfoState, dispatch] = useReducer(reducer, defaultUserInfo)
 
-  // default reference for RWD, theme & user info
+  // default reference for RWD, theme
   const theme = useTheme()
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   const isTablet = useMediaQuery(theme.breakpoints.up('sm'));
@@ -125,7 +125,6 @@ export const UserInfoProvider = ({children}) => {
     isDesktop: isDesktop,
     isTablet: isTablet,
     theme: theme,
-    defaultUserInfo: defaultUserInfo,
   }
 
   return (

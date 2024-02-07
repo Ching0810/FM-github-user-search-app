@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import Container from './component/Container';
 import theme from './theme';
-import { UserInfoProvider } from './context/userInfoContext';
+import { UserInfoProvider } from './UserInfoContext';
 
 function App() {
   //use state variable: mode to control light or dark mode

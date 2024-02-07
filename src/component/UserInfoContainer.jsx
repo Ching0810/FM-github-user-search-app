@@ -4,7 +4,7 @@ import UserAccount from "./UserAccount"
 import UserBio from "./UserBio"
 import UserFollowRepos from "./UserFollowRepos"
 import UserLink from "./UserLink"
-import { useReference } from "../context/userInfoContext"
+import { useReference } from "../UserInfoContext"
 
 export default function UserInfoContainer () {
   const {
